@@ -4,7 +4,7 @@
 
 在前面的章节中，我们探讨了用于顺序工作流的提示链和用于动态决策及不同路径间转换的路由。虽然这些模式不可或缺，但许多复杂的Agent任务涉及多个可*同时*执行而非顺序执行的子任务。这正是**并行化**模式变得至关重要的场景。
 
-并行化涉及并发执行多个组件，包括LLM调用、工具使用乃至整个子 Agent（见图1）。不同于顺序等待每个步骤完成，并行执行允许独立任务同时运行，从而显著缩短可分解为独立部分的任务的总执行时间。
+并行化涉及并发执行多个组件，包括LLM调用、工具使用乃至整个子智能体（见图1）。不同于顺序等待每个步骤完成，并行执行允许独立任务同时运行，从而显著缩短可分解为独立部分的任务的总执行时间。
 
 设想一个旨在研究主题并总结其发现的 Agent。顺序方法可能如下：
 
@@ -26,7 +26,7 @@
 
 ![][image1]
 
-图 1. 带有子 Agent 的并行化示例
+图 1. 带有子智能体的并行化示例
 
 像LangChain、LangGraph和Google ADK这样的框架提供了并行执行机制。在LangChain表达式语言（LCEL）中，您可以通过运算符（如 | 用于顺序）组合可运行对象实现并行执行，并通过构建支持分支并发执行的链或图。LangGraph凭借其图结构，允许定义可从单个状态转换执行的多个节点，从而在工作流中启用并行分支。Google ADK提供强大的原生机制促进和管理 Agent 的并行执行，显著提升复杂多 Agent 系统的效率和可扩展性。ADK框架的这一固有能力使开发人员能够设计多个 Agent 并发而非顺序操作的解决方案。
 
@@ -215,7 +215,7 @@ from google.adk.tools import google_search
 
 GEMINI_MODEL = "gemini-2.0-flash"
 
-## --- 1. 定义研究员子 Agent（并行运行）---
+## --- 1. 定义研究员子智能体（并行运行）---
 ## 研究员 1：可再生能源
 researcher_agent_1 = LlmAgent(
     name="RenewableEnergyResearcher",
@@ -314,7 +314,7 @@ root_agent = sequential_pipeline_agent
 
 此代码定义了一个用于研究和综合可持续技术进展信息的多 Agent 系统。系统设置了三个 LlmAgent 实例作为专门的研究员：ResearcherAgent_1 专注于可再生能源，ResearcherAgent_2 研究电动汽车技术，ResearcherAgent_3 调查碳捕获方法。每个研究员 Agent 配置使用 GEMINI_MODEL 和 google_search 工具，被指示用 1-2 句话简洁总结发现，并通过 output_key 将摘要存储在会话状态中。
 
-随后创建名为 ParallelWebResearchAgent 的 ParallelAgent 来并发运行这三个研究员 Agent，实现并行研究以节省时间。当所有子 Agent（研究员）完成并填充状态后，ParallelAgent 结束执行。
+随后创建名为 ParallelWebResearchAgent 的 ParallelAgent 来并发运行这三个研究员智能体，实现并行研究以节省时间。当所有子智能体（研究员）完成并填充状态后，ParallelAgent 结束执行。
 
 接下来定义 MergerAgent（同样是 LlmAgent）来综合研究结果。该 Agent 以并行研究员存储在会话状态中的摘要作为输入，其指令强调输出必须严格基于提供的输入摘要，禁止添加外部知识。MergerAgent 旨在将组合的发现结构化为带有各主题标题和简短总体结论的报告。
 
@@ -343,7 +343,7 @@ root_agent = sequential_pipeline_agent
 * 采用并发或并行架构会引入显著复杂性和成本，影响设计、调试和系统日志等关键开发环节
 * 像 LangChain 和 Google ADK 这样的框架提供定义和管理并行执行的内置支持
 * 在 LangChain 表达式语言（LCEL）中，RunnableParallel 是并行运行多个可运行对象的关键构造
-* Google ADK 可通过 LLM 驱动的委托实现并行执行，协调器 Agent 的 LLM 识别独立子任务并触发专门子 Agent 的并发处理
+* Google ADK 可通过 LLM 驱动的委托实现并行执行，协调器智能体的 LLM 识别独立子任务并触发专门子智能体的并发处理
 * 并行化有助于减少整体延迟，使 Agent 系统在处理复杂任务时更具响应性
 
 ## 结论

@@ -86,7 +86,7 @@ robust_location_agent = SequentialAgent(
 )
 ```
 
-此代码使用 ADK 的 SequentialAgent 和三个子 Agent 定义了一个强大的位置检索系统。primary_handler 是第一个 Agent，尝试使用 get_precise_location_info 工具获取精确的位置信息。fallback_handler 充当备份，通过检查状态变量来检查主要查找是否失败。如果主要查找失败，回退 Agent 从用户的查询中提取城市并使用 get_general_area_info 工具。response_agent 是序列中的最终 Agent。它查看存储在状态中的位置信息。此 Agent 旨在向用户呈现最终结果。如果没有找到位置信息，它会道歉。SequentialAgent 确保这三个 Agent 按预定义的顺序执行。这种结构允许采用分层方法进行位置信息检索。
+此代码使用 ADK 的 SequentialAgent 和三个子智能体定义了一个强大的位置检索系统。primary_handler 是第一个智能体，尝试使用 get_precise_location_info 工具获取精确的位置信息。fallback_handler 充当备份，通过检查状态变量来检查主要查找是否失败。如果主要查找失败，回退智能体从用户的查询中提取城市并使用 get_general_area_info 工具。response_agent 是序列中的最终智能体。它查看存储在状态中的位置信息。此智能体旨在向用户呈现最终结果。如果没有找到位置信息，它会道歉。SequentialAgent 确保这三个智能体按预定义的顺序执行。这种结构允许采用分层方法进行位置信息检索。
 
 ## 概览
 

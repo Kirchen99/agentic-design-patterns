@@ -151,7 +151,7 @@ if __name__ == "__main__":
 
 ## 实操代码（Google ADK）
 
-以下代码示例演示了通过创建父子关系在 Google ADK 中建立层次化 Agent 结构。代码定义了两种类型的 Agent：LlmAgent 和从 BaseAgent 派生的自定义 TaskExecutor Agent。TaskExecutor 专为特定的非 LLM 任务而设计，在此示例中，它只是生成"任务成功完成"事件。使用指定的模型和指令初始化名为 greeter 的 LlmAgent，以充当友好的欢迎者。自定义 TaskExecutor 实例化为 task_doer。创建名为 coordinator 的父 LlmAgent，也带有模型和指令。coordinator 的指令引导它将欢迎委托给 greeter，将任务执行委托给 task_doer。greeter 和 task_doer 作为子 Agent 添加到 coordinator，建立父子关系。然后代码断言此关系设置正确。最后，它打印一条消息，指示已成功创建 Agent 层次结构。
+以下代码示例演示了通过创建父子关系在 Google ADK 中建立层次化智能体结构。代码定义了两种类型的智能体：LlmAgent 和从 BaseAgent 派生的自定义 TaskExecutor 智能体。TaskExecutor 专为特定的非 LLM 任务而设计，在此示例中，它只是生成"任务成功完成"事件。使用指定的模型和指令初始化名为 greeter 的 LlmAgent，以充当友好的欢迎者。自定义 TaskExecutor 实例化为 task_doer。创建名为 coordinator 的父 LlmAgent，也带有模型和指令。coordinator 的指令引导它将欢迎委托给 greeter，将任务执行委托给 task_doer。greeter 和 task_doer 作为子智能体添加到 coordinator，建立父子关系。然后代码断言此关系设置正确。最后，它打印一条消息，指示已成功创建智能体层次结构。
 
 ```python
 from google.adk.agents import LlmAgent, BaseAgent
@@ -181,7 +181,7 @@ greeter = LlmAgent(
 
 task_doer = TaskExecutor() # 实例化我们的具体自定义 Agent
 
-## 创建父 Agent 并分配其子 Agent
+## 创建父智能体并分配其子智能体
 ## 父 Agent 的描述和指令应该引导其委托逻辑。
 coordinator = LlmAgent(
     name="Coordinator",
@@ -202,7 +202,7 @@ assert task_doer.parent_agent == coordinator
 print("Agent 层次结构创建成功。")
 ```
 
-此代码摘录说明了在 Google ADK 框架中使用 LoopAgent 建立迭代工作流。代码定义了两个 Agent：ConditionChecker 和 ProcessingStep。ConditionChecker 是一个自定义 Agent，检查会话状态中的"status"值。如果"status"为"completed"，ConditionChecker 升级事件以停止循环。否则，它生成事件以继续循环。ProcessingStep 是使用"gemini-2.0-flash-exp"模型的 LlmAgent。其指令是执行任务，如果是最后一步则将会话"status"设置为"completed"。创建名为 StatusPoller 的 LoopAgent。StatusPoller 配置为 max_iterations=10。StatusPoller 包括 ProcessingStep 和 ConditionChecker 实例作为子 Agent。LoopAgent 将顺序执行子 Agent 最多 10 次迭代，如果 ConditionChecker 发现状态为"completed"则停止。
+此代码摘录说明了在 Google ADK 框架中使用 LoopAgent 建立迭代工作流。代码定义了两个智能体：ConditionChecker 和 ProcessingStep。ConditionChecker 是一个自定义智能体，检查会话状态中的"status"值。如果"status"为"completed"，ConditionChecker 升级事件以停止循环。否则，它生成事件以继续循环。ProcessingStep 是使用"gemini-2.0-flash-exp"模型的 LlmAgent。其指令是执行任务，如果是最后一步则将会话"status"设置为"completed"。创建名为 StatusPoller 的 LoopAgent。StatusPoller 配置为 max_iterations=10。StatusPoller 包括 ProcessingStep 和 ConditionChecker 实例作为子智能体。LoopAgent 将顺序执行子智能体最多 10 次迭代，如果 ConditionChecker 发现状态为"completed"则停止。
 
 ```python
 import asyncio
@@ -254,7 +254,7 @@ poller = LoopAgent(
 ## 10 次迭代。
 ```
 
-此代码摘录阐明了 Google ADK 中的 SequentialAgent 模式，专为构建线性工作流而设计。此代码使用 google.adk.agents 库定义顺序 Agent 管道。管道由两个 Agent 组成，step1 和 step2。step1 命名为"Step1_Fetch"，其输出将存储在会话状态中的键"data"下。step2 命名为"Step2_Process"，并被指示分析存储在 session.state["data"] 中的信息并提供摘要。名为"MyPipeline"的 SequentialAgent 编排这些子 Agent 的执行。当使用初始输入运行管道时，step1 将首先执行。来自 step1 的响应将保存到键"data"下的会话状态中。随后，step2 将执行，根据其指令利用 step1 放入状态的信息。此结构允许构建工作流，其中一个 Agent 的输出成为下一个 Agent 的输入。这是创建多步 AI 或数据处理管道的常见模式。
+此代码摘录阐明了 Google ADK 中的 SequentialAgent 模式，专为构建线性工作流而设计。此代码使用 google.adk.agents 库定义顺序智能体管道。管道由两个智能体组成，step1 和 step2。step1 命名为"Step1_Fetch"，其输出将存储在会话状态中的键"data"下。step2 命名为"Step2_Process"，并被指示分析存储在 session.state["data"] 中的信息并提供摘要。名为"MyPipeline"的 SequentialAgent 编排这些子智能体的执行。当使用初始输入运行管道时，step1 将首先执行。来自 step1 的响应将保存到键"data"下的会话状态中。随后，step2 将执行，根据其指令利用 step1 放入状态的信息。此结构允许构建工作流，其中一个智能体的输出成为下一个智能体的输入。这是创建多步 AI 或数据处理管道的常见模式。
 
 ```python
 from google.adk.agents import SequentialAgent, LlmAgent # Changed Agent to LlmAgent
@@ -280,7 +280,7 @@ pipeline = SequentialAgent(
 ## Step2 将执行，按指示使用来自状态的信息。
 ```
 
-以下代码示例说明了 Google ADK 中的 ParallelAgent 模式，它促进多个 Agent 任务的并发执行。data_gatherer 设计为并发运行两个子 Agent：weather_fetcher 和 news_fetcher。weather_fetcher Agent 被指示获取给定位置的天气并将结果存储在 session.state["weather_data"] 中。同样，news_fetcher Agent 被指示检索给定主题的头条新闻故事并将其存储在 session.state["news_data"] 中。每个子 Agent 都配置为使用"gemini-2.0-flash-exp"模型。ParallelAgent 编排这些子 Agent 的执行，允许它们并行工作。来自 weather_fetcher 和 news_fetcher 的结果将被收集并存储在会话状态中。最后，示例展示了如何在 Agent 执行完成后从 final_state 访问收集的天气和新闻数据。
+以下代码示例说明了 Google ADK 中的 ParallelAgent 模式，它促进多个智能体任务的并发执行。data_gatherer 设计为并发运行两个子智能体：weather_fetcher 和 news_fetcher。weather_fetcher 智能体被指示获取给定位置的天气并将结果存储在 session.state["weather_data"] 中。同样，news_fetcher 智能体被指示检索给定主题的头条新闻故事并将其存储在 session.state["news_data"] 中。每个子智能体都配置为使用"gemini-2.0-flash-exp"模型。ParallelAgent 编排这些子智能体的执行，允许它们并行工作。来自 weather_fetcher 和 news_fetcher 的结果将被收集并存储在会话状态中。最后，示例展示了如何在智能体执行完成后从 final_state 访问收集的天气和新闻数据。
 
 ```python
 from google.adk.agents import LlmAgent, ParallelAgent # Changed Agent to LlmAgent
@@ -304,7 +304,7 @@ news_fetcher = LlmAgent( # Changed Agent to LlmAgent
     output_key="news_data"      # 结果将存储在 session.state["news_data"] 中
 )
 
-## 创建 ParallelAgent 以编排子 Agent
+## 创建 ParallelAgent 以编排子智能体
 data_gatherer = ParallelAgent(
     name="data_gatherer",
     sub_agents=[
@@ -314,7 +314,7 @@ data_gatherer = ParallelAgent(
 )
 ```
 
-提供的代码段示例了 Google ADK 中的"Agent 作为工具"范式，使 Agent 能够以类似于工具调用的方式利用另一个 Agent 的能力。具体来说，代码使用 Google 的 LlmAgent 和 AgentTool 类定义了一个图像生成系统。它由两个 Agent 组成：父 artist_agent 和子 Agent image_generator_agent。generate_image 函数是一个简单的工具，模拟图像创建，返回模拟图像数据。image_generator_agent 负责根据其接收的文本提示词使用此工具。artist_agent 的角色是首先发明一个创意图像提示词。然后它通过 AgentTool 包装器调用 image_generator_agent。AgentTool 充当桥梁，允许一个 Agent 将另一个 Agent 用作工具。当 artist_agent 调用 image_tool 时，AgentTool 使用艺术家发明的提示词调用 image_generator_agent。image_generator_agent 然后使用该提示词使用 generate_image 函数。最后，生成的图像（或模拟数据）通过 Agent 返回。此架构演示了一个分层 Agent 系统，其中更高级别的 Agent 编排较低级别的专门 Agent 以执行任务。
+提供的代码段示例了 Google ADK 中的"智能体作为工具"范式，使智能体能够以类似于工具调用的方式利用另一个智能体的能力。具体来说，代码使用 Google 的 LlmAgent 和 AgentTool 类定义了一个图像生成系统。它由两个智能体组成：父 artist_agent 和子智能体 image_generator_agent。generate_image 函数是一个简单的工具，模拟图像创建，返回模拟图像数据。image_generator_agent 负责根据其接收的文本提示词使用此工具。artist_agent 的角色是首先发明一个创意图像提示词。然后它通过 AgentTool 包装器调用 image_generator_agent。AgentTool 充当桥梁，允许一个智能体将另一个智能体用作工具。当 artist_agent 调用 image_tool 时，AgentTool 使用艺术家发明的提示词调用 image_generator_agent。image_generator_agent 然后使用该提示词使用 generate_image 函数。最后，生成的图像（或模拟数据）通过智能体返回。此架构演示了一个分层智能体系统，其中更高级别的智能体编排较低级别的专门智能体以执行任务。
 
 ```python
 from google.adk.agents import LlmAgent

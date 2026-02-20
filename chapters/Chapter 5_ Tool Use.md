@@ -19,7 +19,7 @@
 
 虽然"工具调用"精确描述了调用预定义代码函数的过程，但采用更广泛的"工具调用"概念更具实践价值。这一概念承认智能体力远超简单函数执行范畴——"工具"既可以是传统函数，也可以是复杂的 API 端点、数据库查询请求，甚至是向其他专业智能智能体令。这种视角帮助我们构建更复杂的系统，例如主智能体可智能体任务委托给专用"分析师智能体"，或通过 API 查询外部知识库。以"工具调用"的思维方式，能更全面把握智能体作为跨智能体智能实体生态系统的编排者潜力。
 
-像 LangChain、LangGraph 和 Google智能体veloper Kit (ADK) 这样的框架为定义工具并将它们集成到智能智能体提供了强大的支持，通常利用现代 LLM（如 Gemini 或 OpenAI 系列中的那些）的原生工具调用能力。在这些框架的"画布"上，您定义工具，然后配置智能体（通常是 LLM 智能体）以意识到并能够使用这些工具。
+像 LangChain、LangGraph 和 Google 智能体开发工具包 (ADK) 这样的框架为定义工具并将它们集成到智能智能体提供了强大的支持，通常利用现代 LLM（如 Gemini 或 OpenAI 系列中的那些）的原生工具调用能力。在这些框架的"画布"上，您定义工具，然后配置智能体（通常是 LLM 智能体）以意识到并能够使用这些工具。
 
 工具使用是构建强大、交互式且具环境感知能力智能体础模式。
 
@@ -284,7 +284,7 @@ if __name__ == "__main__":
 
 ## 实操代码（Google ADK）
 
-## Google智能体veloper Kit (ADK) 提供原生集成工具库，可直接扩展智能智能体
+## Google 智能体开发工具包 (ADK) 提供原生集成工具库，可直接扩展智能智能体
 
 ## **Google 搜索：** 此类组件的主要示例是 Google 搜索工具。此工具作为 Google 搜索引擎的直接接口，为智能体执行网络搜索和检索外部信息的功能。
 
@@ -563,7 +563,7 @@ if __name__ == "__main__":
 ## 参考文献
 
 1. LangChain Documentation (Tools): [https://python.langchain.com/docs/integrations/tools/](https://python.langchain.com/docs/integrations/tools/)
-2. Google智能体veloper Kit (ADK) Documentation (Tools): [https://google.github.io/adk-docs/tools/](https://google.github.io/adk-docs/tools/)
+2. Google 智能体开发工具包 (ADK) 文档 (工具): [https://google.github.io/adk-docs/tools/](https://google.github.io/adk-docs/tools/)
 3. OpenAI Function Calling Documentation: [https://platform.openai.com/docs/guides/function-calling](https://platform.openai.com/docs/guides/function-calling)
 4. CrewAI Documentation (Tools): [https://docs.crewai.com/concepts/tools](https://docs.crewai.com/concepts/tools)
 

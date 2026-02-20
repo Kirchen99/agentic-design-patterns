@@ -24,7 +24,7 @@
 
 路由机制可以在智能体周期内的多个节点实现。它们可以在开始时应用以对主要任务进行分类，在处理链内的中间点应用以确定后续操作，或在子程序期间应用以从给定集合中选择最合适的工具。
 
-诸如 LangChain、LangGraph 和 Google 的智能体veloper Kit (ADK) 等计算框架提供了用于定义和管理这种条件逻辑的显式构造。凭借其基于状态的图架构，LangGraph 特别适合复杂的路由场景，其中决策取决于整个系统的累积状态。类似地，Google 的 ADK 提供了用于构建智能智能体互模型的基础组件，这些组件作为实现路由逻辑的基础。在这些框架提供的执行环境中，开发人员定义可能的操作路径以及决定计算图中节点之间转换的函数或基于模型的评估。
+诸如 LangChain、LangGraph 和 Google 智能体开发工具包 (ADK) 等计算框架提供了用于定义和管理这种条件逻辑的显式构造。凭借其基于状态的图架构，LangGraph 特别适合复杂的路由场景，其中决策取决于整个系统的累积状态。类似地，Google 的 ADK 提供了用于构建智能智能体互模型的基础组件，这些组件作为实现路由逻辑的基础。在这些框架提供的执行环境中，开发人员定义可能的操作路径以及决定计算图中节点之间转换的函数或基于模型的评估。
 
 路由的实现使系统能够超越确定性顺序处理。它促进了更自适应的执行流的开发，可以动态且适当地响应更广泛的输入和状态变化。
 
@@ -346,6 +346,6 @@ main 函数通过使用不同请求运行协调器来演示系统的用法，展
 ## 参考文献
 
 1. LangGraph Documentation: [https://www.langchain.com/](https://www.langchain.com/)
-2. Google智能体veloper Kit Documentation: [https://google.github.io/adk-docs/](https://google.github.io/adk-docs/)
+2. Google 智能体开发工具包文档: [https://google.github.io/adk-docs/](https://google.github.io/adk-docs/)
 
 [image1]: ../images/chapter-2/image1.png

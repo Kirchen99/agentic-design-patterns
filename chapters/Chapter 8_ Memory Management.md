@@ -22,7 +22,7 @@
 
 ## 实操代码：Google ADK 中的记忆管理
 
-Google智能体veloper Kit (ADK) 提供结构化上下文和记忆管理方法，包含实际应用组件。深入理解 ADK 的 Session、State 和 Memory 对构建需保留信息的智能智能体。
+Google 智能体开发工具包 (ADK) 提供结构化上下文和记忆管理方法，包含实际应用组件。深入理解 ADK 的 Session、State 和 Memory 对构建需保留信息的智能智能体。
 
 与人类交互类似，智能体需能回忆先前交流以进行连贯对话。ADK 通过三个核心概念简化上下文管理：
 
@@ -109,7 +109,7 @@ Agent 通过单个 session.state 字典访问所有状态数据。SessionService
 1. **简单方法：使用 output_key（用于智能体回复）：** 如果您只想将智能智能体本响应直接保存到状态中，这是最简单的方法。设置 LlmAgent 时，只需告诉它要使用的 output_key。Runner 看到这一点并在追加事件时自动创建必要的操作以将响应保存到状态。让我们看一个通过 output_key 演示状态更新的代码示例。
 
 ```python
-## 从 Google智能体veloper Kit (ADK) 导入必要的类
+## 从 Google 智能体开发工具包 (ADK) 导入必要的类
 from google.adk.agents import LlmAgent
 from google.adk.sessions import InMemorySessionService, Session
 from google.adk.runners import Runner
